@@ -19,9 +19,12 @@ cd p3-stack
 ./install.sh
 ```
 
-`install.sh` links every `skills/*` directory into `~/.agents/skills/`, where T3 Code reads skills. Use `./install.sh --project /path/to/repo` to install into a project's `.agents/skills/` instead.
+T3 Code does not load skills itself. Each thread's provider does, from its own folder:
 
-Claude Code does not read `.agents/skills/`. Add `--claude` to also link into `~/.claude/skills/`, or into the project's `.claude/skills/` when combined with `--project`. Re-running the script relinks existing symlinks and skips anything that is not one.
+- Claude threads run on the Claude Agent SDK, which reads `~/.claude/skills/` (and Claude plugins), the same as Claude Code. Run `./install.sh --claude`.
+- Codex and other agents that follow the `.agents/skills/` convention read `~/.agents/skills/`. Plain `./install.sh` links there.
+
+`install.sh` always links every `skills/*` directory into `~/.agents/skills/`, and `--claude` adds `~/.claude/skills/`. Add `--project /path/to/repo` to install into that repo's `.agents/skills/` (and `.claude/skills/`) instead. Re-running the script relinks existing symlinks and skips anything that is not one.
 
 ## Get started
 
