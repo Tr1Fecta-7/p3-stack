@@ -4,7 +4,9 @@ Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the p
 
 ## Unreleased
 
-Nothing yet.
+### p3-only
+
+- `install.sh --claude` also links the skills into `.claude/skills/` (under `$HOME`, or the repo with `--project`), since Claude Code does not read `.agents/skills/`.
 
 ## 2026-10-12: sync pstack 0.15.10 → 0.15.20
 

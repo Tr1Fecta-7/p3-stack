@@ -21,6 +21,8 @@ cd p3-stack
 
 `install.sh` links every `skills/*` directory into `~/.agents/skills/`, where T3 Code reads skills. Use `./install.sh --project /path/to/repo` to install into a project's `.agents/skills/` instead.
 
+Claude Code does not read `.agents/skills/`. Add `--claude` to also link into `~/.claude/skills/`, or into the project's `.claude/skills/` when combined with `--project`. Re-running the script relinks existing symlinks and skips anything that is not one.
+
 ## Get started
 
 1. Run `/setup-p3`. It reads `orchestrator_capabilities` and writes `p3-models.md`, mapping each role (code, judgment, the review panels) to a provider and model you actually have.
