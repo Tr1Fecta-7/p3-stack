@@ -25,7 +25,7 @@ When `p3-models.md` is missing and it matters, ask whether the user wants to pic
 
 ## Get set up
 
-1. Install by cloning the repo and running `./install.sh`. It links every skill into `~/.agents/skills/`, where T3 Code reads skills; `./install.sh --project /path/to/repo` targets a project's `.agents/skills/` instead.
+1. Install by cloning the repo and running `./install.sh --claude`. Each T3 thread loads skills through its provider: Claude threads read `~/.claude/skills/`, Codex reads `~/.agents/skills/`. Plain `./install.sh` links only `~/.agents/skills/`; `--project /path/to/repo` targets that repo's folders instead.
 2. Run [`/setup-p3`](../setup-p3/SKILL.md). It asks for a reasoning budget, maps a model to each role, and writes `p3-models.md`. The file applies to new sessions.
 3. Start a real task with `/p3-mode`, a goal, and a check that can pass or fail.
 
