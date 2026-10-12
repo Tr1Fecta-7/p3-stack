@@ -36,7 +36,8 @@ map_path() {
     skills/poteto-mode/*) echo "skills/p3-mode/${1#skills/poteto-mode/}" ;;
     skills/poteto-help/*) echo "skills/p3-help/${1#skills/poteto-help/}" ;;
     skills/setup-pstack/*) echo "skills/setup-p3/${1#skills/setup-pstack/}" ;;
-    agents/poteto-agent.md) echo "agents/p3-agent.md" ;;
+    agents/poteto-agent.md) echo "skills/p3-agent/SKILL.md" ;;
+    agents/comment-sicko.md) echo "skills/no-comments/references/comment-sicko.md" ;;
     *) echo "$1" ;;
   esac
 }
