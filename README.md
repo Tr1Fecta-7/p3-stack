@@ -14,7 +14,7 @@ pstack is poteto's answer to AI slop code. It turns an agent into an engineering
 ## Install
 
 ```bash
-git clone https://github.com/uzairansaruzi/p3-stack.git
+git clone https://github.com/Tr1Fecta-7/p3-stack.git
 cd p3-stack
 ./install.sh
 ```
@@ -31,13 +31,28 @@ cd p3-stack
 
 `p3-mode` routes every task. Its playbooks: investigation, bug fix, perf issue, hillclimb, runtime forensics, trace forensics, feature, refactoring, prototype, visual parity, authoring a skill, eval, babysit, shipping, autonomous run, orchestrate, autopilot-full, autopilot-stack, session pickup, pause safely, multi-phase plan, worktree cleanup, opening a PR.
 
+The thread that receives `/p3-mode` runs the playbook. It owns the todo list and every `delegate_task` spawn. [`agents/p3-agent.md`](agents/p3-agent.md) wraps the delegates a run spawns. Never delegate the playbook itself to it.
+
 ## Skills
 
-architect, arena, automate-me, benchmark-checklist, blast-radius, bro, correct, create-verification-skill, figure-it-out, how, interrogate, maintain-verification-skill, make-bot-ui, no-comments, p3-help, recall, reflect, setup-p3, show-me-your-work, swarm, tdd, teach, technical-writing, typescript-best-practices, unslop, why.
+architect, arena, automate-me, benchmark-checklist, blast-radius, bro, correct, create-verification-skill, figure-it-out, how, interrogate, ketchup, maintain-verification-skill, make-bot-ui, no-comments, p3-help, recall, reflect, setup-p3, show-me-your-work, swarm, tdd, teach, technical-writing, typescript-best-practices, unslop, why.
 
 ## Principles
 
 The twenty-four principle skills are indexed inside `p3-mode` and referenced by the other skills by name.
+
+## Staying current with pstack
+
+[`UPSTREAM`](UPSTREAM) pins the pstack commit this repo matches, and [`CHANGES.md`](CHANGES.md) records every sync and every p3-only change.
+
+```bash
+scripts/upstream.sh status   # upstream commits since the pin
+scripts/upstream.sh files    # changed upstream files mapped to p3-stack paths
+scripts/upstream.sh diff     # the upstream diff to port
+scripts/upstream.sh pin      # move the pin once the port is done
+```
+
+Port each diff through the Cursor to T3 Code map in [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack), never by copying upstream files.
 
 ## Credit
 
