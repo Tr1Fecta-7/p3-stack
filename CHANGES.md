@@ -8,6 +8,10 @@ Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the p
 
 - `install.sh --claude` also links the skills into `.claude/skills/` (under `$HOME`, or the repo with `--project`), since Claude Code does not read `.agents/skills/`.
 - README, `install.sh`, `p3-help` and `AGENTS.md`: T3 Code loads skills through each thread's provider, so Claude threads read `~/.claude/skills/` and Codex reads `~/.agents/skills/`. The old text said T3 Code reads `~/.agents/skills/`.
+- **`agents/p3-agent.md` is now the `p3-agent` skill.** The initial port told the parent to "point the worker at `agents/p3-agent.md`", and the note told the worker to read `skills/p3-mode/SKILL.md`. Both paths only resolve inside the p3-stack repo, and `install.sh` never installed `agents/`, so a worker in another project skipped p3-mode or searched the whole disk for it. A skill installs next to `p3-mode` and the principles, so a brief now opens with "Load the `p3-agent` skill first", by name, as Cursor spawns `poteto-agent` by name. `p3-agent` is model-invocable so workers can load it. `scripts/upstream.sh` maps upstream's `agents/poteto-agent.md` to it.
+- **The `p3-agent` text follows upstream again.** Its body is upstream's `poteto-agent.md` paragraph with T3 terms, including "the `p3-mode` skill's `SKILL.md`" instead of a path. The description regains upstream's fresh-delegate rule and "a brief without this note skips that read and drifts". The port's extra paragraph on brief scope and git is gone, since every brief already carries its constraints.
+- **`agents/comment-sicko.md` moved to `skills/no-comments/references/comment-sicko.md`**, the only skill that uses it, so `no-comments` reads it from its own folder. `scripts/upstream.sh` maps it.
+- `autopilot-stack`: the comment pass runs `/no-comments`, as upstream does, instead of pointing at `agents/comment-sicko.md`.
 
 ## 2026-10-12: sync pstack 0.15.10 → 0.15.20
 

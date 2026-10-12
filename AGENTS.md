@@ -23,7 +23,8 @@ If you are a delegated worker, your brief names exactly one file. Write only tha
 | `AskQuestion` | Ask plainly in the thread. `t3_pending_request_list`/`t3_pending_request_read`/`t3_pending_request_respond` answer questions in other threads. |
 | `control-ui`, `control-cli` (from cursor-team-kit) | `preview_*` browser tools and `device_*` simulator tools; `preview_recording_start`/`preview_recording_stop` and `device_screenshot` for evidence; `browser.preview` shows a file to the user. |
 | `~/.cursor/rules/pstack-models.mdc`, `/add-plugin` | `setup-p3` writes `p3-models.md`; install is a symlink of `skills/*` into `~/.agents/skills/` (Codex), plus `~/.claude/skills/` (Claude threads) with `--claude` (see README). |
-| `poteto-mode`, `poteto-agent`, `poteto-help`, `setup-pstack` | `p3-mode`, `agents/p3-agent.md`, `p3-help`, `setup-p3`. |
+| `poteto-mode`, `poteto-agent`, `poteto-help`, `setup-pstack` | `p3-mode`, `p3-agent`, `p3-help`, `setup-p3`. |
+| `subagent_type: "poteto-agent"` | A brief that opens with "Load the `p3-agent` skill first." `delegate_task` has no agent types. Skills install where every worker can load them by name. |
 | Cursor custom modes ("press option+enter") | Skills are invoked by name (`/p3-mode`). No mode toggles. |
 
 Everything else in pstack transfers as written: the principles, the playbook shapes, the brief template, the reply style, the autonomy rules. Adopt it.
@@ -49,7 +50,7 @@ Keep these names exactly.
 
 - `skills/<name>/SKILL.md` is a skill. `skills/principle-*/SKILL.md` are the short principles.
 - `skills/p3-mode/SKILL.md` is the mode router; its playbooks live in `skills/p3-mode/playbooks/`.
-- `agents/` holds prompt briefs for delegated roles (`p3-agent.md`, `comment-sicko.md`), not harness agent definitions.
+- Upstream's `agents/` live in skills, because `install.sh` installs only `skills/*` and a worker in another project can load a skill by name but cannot find a repo path. `poteto-agent.md` is the `p3-agent` skill, which is model-invocable so workers can load it. `comment-sicko.md` is `skills/no-comments/references/comment-sicko.md`, pasted into the brief by `no-comments`. Keep their wording as close to upstream as the map allows.
 
 ## T3 tool quick reference
 

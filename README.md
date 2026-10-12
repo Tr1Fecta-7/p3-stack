@@ -36,11 +36,11 @@ T3 Code does not load skills itself. Each thread's provider does, from its own f
 
 `p3-mode` routes every task. Its playbooks: investigation, bug fix, perf issue, hillclimb, runtime forensics, trace forensics, feature, refactoring, prototype, visual parity, authoring a skill, eval, babysit, shipping, autonomous run, orchestrate, autopilot-full, autopilot-stack, session pickup, pause safely, multi-phase plan, worktree cleanup, opening a PR.
 
-The thread that receives `/p3-mode` runs the playbook. It owns the todo list and every `delegate_task` spawn. [`agents/p3-agent.md`](agents/p3-agent.md) wraps the delegates a run spawns. Never delegate the playbook itself to it.
+The thread that receives `/p3-mode` runs the playbook. It owns the todo list and every `delegate_task` spawn. The [`p3-agent`](skills/p3-agent/SKILL.md) skill wraps the delegates a run spawns: each brief opens with "Load the `p3-agent` skill first." Never delegate the playbook itself to it.
 
 ## Skills
 
-architect, arena, automate-me, benchmark-checklist, blast-radius, bro, correct, create-verification-skill, figure-it-out, how, interrogate, ketchup, maintain-verification-skill, make-bot-ui, no-comments, p3-help, recall, reflect, setup-p3, show-me-your-work, swarm, tdd, teach, technical-writing, typescript-best-practices, unslop, why.
+architect, arena, automate-me, benchmark-checklist, blast-radius, bro, correct, create-verification-skill, figure-it-out, how, interrogate, ketchup, maintain-verification-skill, make-bot-ui, no-comments, p3-agent, p3-help, recall, reflect, setup-p3, show-me-your-work, swarm, tdd, teach, technical-writing, typescript-best-practices, unslop, why.
 
 ## Principles
 
