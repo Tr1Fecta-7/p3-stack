@@ -32,6 +32,7 @@ resolve() { up rev-parse --verify "${1:-origin/main}^{commit}"; }
 map_path() {
   case "$1" in
     .cursor-plugin/*|plugin.json|assets/*|automations/*|docs/*|LICENSE|.gitignore) echo "-" ;;
+    skills/poteto-mode/scripts/check-plan.mjs|skills/poteto-mode/scripts/worktree-audit.sh) echo "skills/p3-mode/${1#skills/poteto-mode/}" ;;
     skills/poteto-mode/scripts/*) echo "-" ;;
     skills/poteto-mode/*) echo "skills/p3-mode/${1#skills/poteto-mode/}" ;;
     skills/poteto-help/*) echo "skills/p3-help/${1#skills/poteto-help/}" ;;

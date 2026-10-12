@@ -1,7 +1,6 @@
 ---
 name: setup-p3
 description: Configure which models p3-stack uses per role and at what reasoning budget. Detects your available models and writes p3-models.md, which overrides the skill defaults. Use for /setup-p3, "configure p3 models", "p3 budget", or changing p3-stack's model choices.
-disable-model-invocation: true
 ---
 
 # Setup p3

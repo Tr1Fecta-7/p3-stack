@@ -69,9 +69,9 @@ Keep these names exactly.
 `UPSTREAM` pins the pstack commit p3-stack matches. `scripts/upstream.sh` caches a clone of cursor/plugins and diffs pstack against that pin. Port upstream diffs. Never copy upstream files over p3 files.
 
 1. `scripts/upstream.sh status` lists the upstream commits since the pin.
-2. `scripts/upstream.sh files` maps each changed upstream file to its p3-stack path. `(new in p3-stack)` needs a fresh port. `(not ported)` is Cursor-only: manifests, assets, `docs/guide`, `poteto-mode/scripts`, benny automations.
+2. `scripts/upstream.sh files` maps each changed upstream file to its p3-stack path. `(new in p3-stack)` needs a fresh port. `(not ported)` is Cursor-only: manifests, assets, `docs/guide`, the `poteto-mode/scripts` that T3 tools replace (`watch-pr`, `orch`, their build files), benny automations. `check-plan.mjs` and `worktree-audit.sh` are ported into `skills/p3-mode/scripts/` with small T3 changes (plan markers, recent-activity check), so port their diffs by hand like any skill file.
 3. For each mapped file, read `scripts/upstream.sh diff HEAD <upstream-path>` and carry the change into the p3 file through the map above. A cut in upstream is a cut in p3. Model-slug swaps have no p3 equivalent.
-4. A `(not ported)` change whose intent still applies, such as a fix to `worktree-audit.sh`, moves into the playbook prose that replaced it.
+4. A `(not ported)` change whose intent still applies, such as a `watch-pr` fix whose rule `watch_pull_request` doesn't cover, moves into the playbook prose that replaced it.
 5. Add a `CHANGES.md` entry with the upstream range and version, what was ported, and what was skipped and why. Then run `scripts/upstream.sh pin`.
 
 Changes made only in p3-stack go in `CHANGES.md` too, under `Unreleased`.

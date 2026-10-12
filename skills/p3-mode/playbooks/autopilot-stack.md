@@ -1,8 +1,3 @@
----
-name: autopilot-stack
-description: Build and verify the queue with full autonomy, then hand the operator one linear base-branch stack to review and land.
----
-
 ### Autopilot-stack
 
 **You own the stack, never the landing. Build and verify the queue with full autonomy, then hand the operator one linear base-branch stack to review and land.** The sibling of **Autopilot-full**.

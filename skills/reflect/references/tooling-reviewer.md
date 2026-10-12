@@ -28,7 +28,7 @@ Scan for:
 
 ## Scope to skills and tools the session actually used
 
-Route findings only to skills, tools, or MCPs this transcript used. A skill counts as used when the transcript shows a file read of its `SKILL.md` (under `.agents/skills/`, `~/.agents/skills/`, or a repo-relative skill path), a `delegate_task` brief naming its path, or a tool call (shell, search, MCP, etc.) matching its documented commands. Speculative routings to skills the parent never opened do not count.
+Route findings only to skills, tools, or MCPs this transcript used. A skill counts as used when the transcript shows a file read of its `SKILL.md` (under `.agents/skills/`, `~/.agents/skills/`, `.claude/skills/`, `~/.claude/skills/`, or a repo-relative skill path), a skill load by name, a `delegate_task` brief naming its path, or a tool call (shell, search, MCP, etc.) matching its documented commands. Speculative routings to skills the parent never opened do not count.
 
 Two finding shapes are valid:
 - The parent invoked the skill and you found a real gap in its body. Route to the skill's relevant section.
