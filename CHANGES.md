@@ -2,9 +2,9 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
-## Unreleased
+## 2026-10-12: upstream parity pass and p3-only fixes
 
-### Upstream parity pass (2026-10-12)
+### Upstream parity
 
 A file-by-file comparison of all 112 ported files against pstack 0.15.20 found content the initial port lost, plus a few p3-only slips. 21 of 24 principles and all of `how`/`why` were already clean.
 
@@ -24,6 +24,9 @@ A file-by-file comparison of all 112 ported files against pstack 0.15.20 found c
 - **Claude-thread skill folders.** `create-verification-skill` writes `.agents/skills/verify-<app>/` and links it from `.claude/skills/`, `automate-me` searches and links both folders, `maintain-verification-skill` expects the link, and `reflect`'s reviewers count skills read from `.claude/skills/` or loaded by name.
 
 ### p3-only
+
+- **Long programs re-read playbooks from the installed skills.** `multi-phase-plan`, `autopilot-full` and `autopilot-stack` told the root to re-read playbooks with `git show origin/main:skills/p3-mode/...`, a path that exists only in the p3-stack repo, not in the project a plan runs in. They now re-read from the installed skills folder, which follows the p3-stack checkout. `check-plan.mjs` looks for `p3-mode/playbooks/` instead of `git show origin/main:`. Upstream has the same pattern with its own repo path.
+- `CHANGES.md` drops the `Unreleased` heading. Installed skills link to the checkout, so a change merged to `main` is live after a pull, and every entry goes under a dated heading.
 
 - `install.sh --claude` also links the skills into `.claude/skills/` (under `$HOME`, or the repo with `--project`), since Claude Code does not read `.agents/skills/`.
 - README, `install.sh`, `p3-help` and `AGENTS.md`: T3 Code loads skills through each thread's provider, so Claude threads read `~/.claude/skills/` and Codex reads `~/.agents/skills/`. The old text said T3 Code reads `~/.agents/skills/`.

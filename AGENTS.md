@@ -74,7 +74,7 @@ Keep these names exactly.
 4. A `(not ported)` change whose intent still applies, such as a `watch-pr` fix whose rule `watch_pull_request` doesn't cover, moves into the playbook prose that replaced it.
 5. Add a `CHANGES.md` entry with the upstream range and version, what was ported, and what was skipped and why. Then run `scripts/upstream.sh pin`.
 
-Changes made only in p3-stack go in `CHANGES.md` too, under `Unreleased`.
+Changes made only in p3-stack go in `CHANGES.md` too, under a dated heading (`## YYYY-MM-DD: <summary>`), newest first. There is no `Unreleased` section. The installed skills link to the checkout, so a change merged to `main` is live after a pull.
 
 ## Definition of done for a skill
 
