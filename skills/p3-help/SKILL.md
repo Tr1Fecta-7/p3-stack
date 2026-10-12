@@ -10,7 +10,7 @@ Answer the user's question about p3-stack, hand them a prompt they can send, and
 
 A message that asks for work, such as "use p3-stack to fix this bug", is not a help question. Read [`p3-mode`](../p3-mode/SKILL.md), do the work under it, and mention once that invoking `/p3-mode` keeps the work in this style.
 
-This file maps questions to the skills and playbooks that hold the answers. Those files own the details. Read the file you route to before you quote it, and trust it when it disagrees with this map. The links here are repo-relative, so give the user the file's public copy: `https://github.com/uzairansaruzi/p3-stack/blob/main/` followed by its path.
+This file maps questions to the skills and playbooks that hold the answers. Those files own the details. Read the file you route to before you quote it, and trust it when it disagrees with this map. The links here are repo-relative, so give the user the file's public copy: `https://github.com/Tr1Fecta-7/p3-stack/blob/main/` followed by its path.
 
 ## Find out what they need
 
@@ -29,7 +29,7 @@ When `p3-models.md` is missing and it matters, ask whether the user wants to pic
 2. Run [`/setup-p3`](../setup-p3/SKILL.md). It asks for a reasoning budget, maps a model to each role, and writes `p3-models.md`. The file applies to new sessions.
 3. Start a real task with `/p3-mode`, a goal, and a check that can pass or fail.
 
-Installing changes nothing until the user invokes a skill. No p3-stack skill loads from the user's words. The [README](../../README.md) has the details. Offer to word their first prompt with them, per [`references/prompting.md`](references/prompting.md).
+Installing changes nothing until the user invokes a skill. Only `/setup-p3` loads from the user's words. The [README](../../README.md) has the details. Offer to word their first prompt with them, per [`references/prompting.md`](references/prompting.md).
 
 If cost is the worry, say where the tokens go and how to spend fewer. p3-stack spends extra tokens on subagents and review panels. Rerun `/setup-p3` and pick a smaller budget or cheaper models. A role set to `auto` or `inherit-parent` runs on the parent thread's model, which saves tokens when that model is cheaper. A shorter panel list runs fewer subagents, one for each entry. Save `/p3-mode` for work that needs rigor.
 
@@ -107,7 +107,7 @@ Principles are one-rule skills that `/p3-mode` reads and cites in its replies. T
 | A question got treated as the next step of the last task | Say "new task", or say the turn doesn't need the mode. |
 | A new model choice had no effect | The file from `/setup-p3` applies to new sessions. Start one. |
 | Runs cost more than expected | See the cost paragraph under Get set up. |
-| A skill didn't load on its own | No p3-stack skill loads from the user's words. Each loads when the user invokes it by name or when `/p3-mode` runs it, and it doesn't run every skill. |
+| A skill didn't load on its own | Only `/setup-p3` loads from the user's words. The others load when the user types them or when `/p3-mode` runs them, and it doesn't run every skill. |
 | Parallel agents overwrote each other | Give each worker its own worktree through `t3_thread_launch`, and keep one writer per worktree. |
 | An overnight run moved but finished nothing | It needs a check that can pass or fail, not a duration. |
 | The reply claims success from a green build | Ask for the real command, flow, stored value, or profile. That's the prove-it-works principle. |

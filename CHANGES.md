@@ -4,6 +4,25 @@ Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the p
 
 ## Unreleased
 
+### Upstream parity pass (2026-10-12)
+
+A file-by-file comparison of all 112 ported files against pstack 0.15.20 found content the initial port lost, plus a few p3-only slips. 21 of 24 principles and all of `how`/`why` were already clean.
+
+- **Restored upstream content.**
+  - `autopilot-full`: the owner's `children.tsv` ledger (step 2), which `autopilot-stack` already referenced, and the per-tick stuck test over it (step 6), using `task_status` and `task_cancel`.
+  - `setup-p3` loads from the user's words again, as upstream's `setup-pstack` does. `p3-help` says "Only `/setup-p3` loads from the user's words" again.
+  - `automate-me`: the rule that keeps `description` one YAML scalar. Upstream's pointer to Cursor's built-in `create-skill` is dropped.
+  - `no-comments`: eval runs need caller pre-approval too.
+  - `session-pickup`: upstream's cross-project privacy rule, as "do not pass another project's `projectId`" to `t3_thread_search`.
+  - `typescript-best-practices`: the `paths` frontmatter.
+- **Shipped two upstream scripts the port had skipped as Cursor-only.** `skills/p3-mode/scripts/check-plan.mjs` is upstream's plan checker, with the program marker `/loop 1h` changed to `schedule_task` and the live-lanes line matching the `swarm workers` role. `multi-phase-plan` step 6 runs it again instead of a shorter hand checklist. `skills/p3-mode/scripts/worktree-audit.sh` is upstream's audit, with the Cursor transcript scan replaced by "anything changed in the last four days" and the bucket renamed `verify-recent-thread`. `worktree-cleanup` runs it again, which defines the buckets the playbook names. `scripts/upstream.sh` maps both, so upstream fixes reach them. `watch-pr` and `orch` stay unported, since `watch_pull_request` and T3's thread tools replace them.
+- **Fixed.**
+  - `swarm` says `inherit-parent`, not `inherit`.
+  - `architect`'s runner prompt links `rationale-template.md` correctly.
+  - `p3-help` links this repo, not `uzairansaruzi/p3-stack`.
+  - Four playbooks lose stray skill frontmatter.
+- **Claude-thread skill folders.** `create-verification-skill` writes `.agents/skills/verify-<app>/` and links it from `.claude/skills/`, `automate-me` searches and links both folders, `maintain-verification-skill` expects the link, and `reflect`'s reviewers count skills read from `.claude/skills/` or loaded by name.
+
 ### p3-only
 
 - `install.sh --claude` also links the skills into `.claude/skills/` (under `$HOME`, or the repo with `--project`), since Claude Code does not read `.agents/skills/`.

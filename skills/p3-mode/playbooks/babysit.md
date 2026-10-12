@@ -1,8 +1,3 @@
----
-name: babysit
-description: Monitor a PR or stack through review and CI to merge-ready, stopping where the human's call begins.
----
-
 ### Babysit
 
 **You own the merge frontier. Declare a mode, clear one PR at a time, stop where the human's call begins.** A request to land or ship is `playbooks/shipping.md`, which begins where this playbook ends.
