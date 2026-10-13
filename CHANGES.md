@@ -2,6 +2,10 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-12: install.sh requires an explicit scope
+
+`install.sh` used to install globally unless `--project` was passed. It now takes `--global` or `--project PATH` and prints usage without one, so a project user never gets home-folder links by accident. Passing both is an error, a project path must already exist, and `--help` works. README, `p3-help`, and the AGENTS.md map show both forms.
+
 ## 2026-10-12: upstream parity pass and p3-only fixes
 
 ### Upstream parity

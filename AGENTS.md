@@ -22,7 +22,7 @@ If you are a delegated worker, your brief names exactly one file. Write only tha
 | `agent-transcripts/*.jsonl` mining | `t3_thread_read`, `t3_thread_search`; `t3_queue_list`/`t3_queue_read`/`t3_queue_edit`/`t3_queue_reorder`/`t3_queue_cancel`/`t3_queue_promote_to_steer` for queued input. |
 | `AskQuestion` | Ask plainly in the thread. `t3_pending_request_list`/`t3_pending_request_read`/`t3_pending_request_respond` answer questions in other threads. |
 | `control-ui`, `control-cli` (from cursor-team-kit) | `preview_*` browser tools and `device_*` simulator tools; `preview_recording_start`/`preview_recording_stop` and `device_screenshot` for evidence; `browser.preview` shows a file to the user. |
-| `~/.cursor/rules/pstack-models.mdc`, `/add-plugin` | `setup-p3` writes `p3-models.md`; install is a symlink of `skills/*` into `~/.agents/skills/` (Codex), plus `~/.claude/skills/` (Claude threads) with `--claude` (see README). |
+| `~/.cursor/rules/pstack-models.mdc`, `/add-plugin` | `setup-p3` writes `p3-models.md`; install is a symlink of `skills/*` into `.agents/skills/` (Codex), plus `.claude/skills/` (Claude threads) with `--claude`, under `--global` (home) or `--project PATH`. No default scope (see README). |
 | `poteto-mode`, `poteto-agent`, `poteto-help`, `setup-pstack` | `p3-mode`, `p3-agent`, `p3-help`, `setup-p3`. |
 | `subagent_type: "poteto-agent"` | A brief that opens with "Load the `p3-agent` skill first." `delegate_task` has no agent types. Skills install where every worker can load them by name. |
 | Cursor custom modes ("press option+enter") | Skills are invoked by name (`/p3-mode`). No mode toggles. |

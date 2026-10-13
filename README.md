@@ -16,15 +16,16 @@ pstack is poteto's answer to AI slop code. It turns an agent into an engineering
 ```bash
 git clone https://github.com/Tr1Fecta-7/p3-stack.git
 cd p3-stack
-./install.sh
+./install.sh --global --claude                 # every project on this machine
+./install.sh --project /path/to/repo --claude  # one repo only
 ```
 
 T3 Code does not load skills itself. Each thread's provider does, from its own folder:
 
-- Claude threads run on the Claude Agent SDK, which reads `~/.claude/skills/` (and Claude plugins), the same as Claude Code. Run `./install.sh --claude`.
-- Codex and other agents that follow the `.agents/skills/` convention read `~/.agents/skills/`. Plain `./install.sh` links there.
+- Claude threads run on the Claude Agent SDK, which reads `.claude/skills/` (and Claude plugins), the same as Claude Code. Pass `--claude`.
+- Codex and other agents that follow the `.agents/skills/` convention read `.agents/skills/`. The script always links there.
 
-`install.sh` always links every `skills/*` directory into `~/.agents/skills/`, and `--claude` adds `~/.claude/skills/`. Add `--project /path/to/repo` to install into that repo's `.agents/skills/` (and `.claude/skills/`) instead. Re-running the script relinks existing symlinks and skips anything that is not one.
+`install.sh` has no default scope. Pass `--global` to link every `skills/*` directory under your home folder, or `--project /path/to/repo` to link it under that repo. Without either it prints usage and exits. Re-running the script relinks existing symlinks and skips anything that is not one.
 
 ## Get started
 
