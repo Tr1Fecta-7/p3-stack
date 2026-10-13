@@ -2,6 +2,23 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-13: sync pstack 0.15.20 → 0.15.21
+
+Upstream range `1b6d44f..1dcc2ba` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- **Where leaf skills live** (364a77e). `p3-mode` says bundled skills live at `../<name>/SKILL.md` from its own file, so a worker can reach a principle leaf even though leaves are typed-only and never appear in its skill list.
+
+### Skipped
+
+- **Absolute path in every delegate prompt** (364a77e). Upstream has the parent paste `poteto-mode`'s absolute path into each `poteto-agent` prompt, and `poteto-agent` reads from it. p3 already solves this with the model-invocable `p3-agent` skill: a brief opens with "Load the `p3-agent` skill first", and the skill sits next to `p3-mode`. Revisit if workers stop finding `p3-mode` by name.
+- **Version bump** (997ffc7). Cursor packaging.
+
+### p3-only
+
+- **Delegates end with nothing running.** A Claude delegate that ends its turn with a background process still running (a dev server started with Bash's background option) never completes: `task_status` stays `running` with `workState: "waiting_for_children"` and `latestTerminalStatus: "completed"`, and the report it ended on is never published. Codex delegates are not affected. `p3-agent` now tells delegates to stop every background process they started before reporting, even when the brief asks otherwise. `p3-mode` tells the parent never to brief a delegate to leave a process running, and how to recover a stuck task (read the branch and `git status`, then `task_cancel`, which also stops the process). Tested in T3 with Haiku and Opus delegates, each change alone. With only the `p3-agent` rule, 5 of 5 stopped their server and completed, including the ones whose brief said to leave it running, but a parent reading `p3-mode` told the user the stuck task was "not done yet" and never cancelled it. With only the `p3-mode` paragraph, the parent recovered correctly, but only 2 of 5 delegates stopped their server, and both "leave it running" briefs got stuck. Both are kept.
+
 ## 2026-10-12: upstream parity pass and p3-only fixes
 
 ### Upstream parity

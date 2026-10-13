@@ -8,6 +8,8 @@ disable-model-invocation: true
 
 Skills are invoked by name (`/p3-mode`). There are no mode toggles.
 
+Bundled skills live at `../<name>/SKILL.md` from this file.
+
 ## Non-negotiables
 
 The Principles section below grounds every trigger. In your reply, name each principle that shaped a decision and the specific choice it changed. Cite only principles whose leaf SKILL.md you read this session.
@@ -91,6 +93,8 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 **Spawn every worker with `delegate_task`.** Code-writing delegates and ad-hoc helpers open their brief with "Load the `p3-agent` skill first." That skill sends the worker to this file. The thread that receives `/p3-mode` runs the playbook. Never delegate a `p3-agent` worker to run the playbook itself. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) set their own roles for diverse-model review. Respect what the skill prescribes.
 
 **Defaults for every `delegate_task` call.** `mode: "async"` for background work, then drain with `task_status` (stop with `task_cancel`). T3 child agents get only the brief and never inherit parent context, so every brief stands alone: the goal, file pointers not inlined context, constraints, and the report format you expect. Pick models by named role, never by slug. `setup-p3` writes the role lines to `p3-models.md`, resolved against `orchestrator_capabilities`. Code delegates tier by difficulty. The hardest changes (cross-cutting design, gnarly concurrency, subtle algorithms) read `hardest tasks`, whether the task needs judgment on vague intent or is a precisely specified sequence of steps to execute to the letter. Trivial mechanical edits go to your fast code model. Per-role lines in `p3-models.md` override the model choices in the routed skills (`how`, `why`, `arena`, `swarm`, `architect`, `interrogate`, `reflect`). A role with no line keeps its default, and a role line of `inherit-parent` or `auto` runs that role on the parent chat model. Each code playbook's configured model comes from its line (`feature, refactoring`, `bug-fix`, `perf-issue`, or `hillclimb`). Prose and judgment read `judgment and prose`. Use `t3_thread_launch` only when a worker needs its own thread, worktree, or branch, and keep one writer per worktree.
+
+**Delegates end with nothing running.** A delegate that ends with a background process still running never completes, and its report is lost. `p3-agent` has delegates stop what they start. Never brief a delegate to leave a process running. When work needs a server kept up, start it yourself and name it in the brief. `task_status` showing `workState: "waiting_for_children"` with `latestTerminalStatus: "completed"` means the work is done and a leftover process holds the task open. Read the result from the delegate's branch and `git status`, then `task_cancel` it, which also stops the process.
 
 You own every delegate's work. Review the diff and write your own summary, don't pass through what it said. A second opinion is the same prompt against a different model. Agreement is high-signal.
 
