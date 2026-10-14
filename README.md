@@ -40,7 +40,7 @@ The thread that receives `/p3-mode` runs the playbook. It owns the todo list and
 
 ## Skills
 
-architect, arena, automate-me, benchmark-checklist, blast-radius, bro, correct, create-verification-skill, figure-it-out, how, in-your-own-words, interrogate, ketchup, maintain-verification-skill, make-bot-ui, no-comments, p3-agent, p3-help, recall, reflect, setup-p3, show-me-your-work, swarm, tdd, teach, technical-writing, typescript-best-practices, unslop, why.
+architect, arena, automate-me, benchmark-checklist, blast-radius, bro, correct, create-verification-skill, figure-it-out, how, in-your-own-words, interrogate, ketchup, maintain-verification-skill, make-bot-ui, no-comments, p3-agent, p3-help, recall, reflect, setup-p3, sharpen, show-me-your-work, swarm, tdd, teach, technical-writing, typescript-best-practices, unslop, why.
 
 ## Principles
 

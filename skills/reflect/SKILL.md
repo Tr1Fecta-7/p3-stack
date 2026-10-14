@@ -20,7 +20,7 @@ Reviewers get only their brief, never the parent's context. Pass the thread id a
 
 One turn, three `delegate_task` calls with `mode: "async"`. Reviewers need tool access to look up the tickets, chat threads, and observability traces the transcript references, so do not restrict their tools.
 
-Resolve each model from its role line in `p3-models.md` via `orchestrator_capabilities`. Never hardcode a slug.
+Resolve each model from its role line in `p3-models.md` via `orchestrator_capabilities`. Never hardcode a slug. Pick each delegate's reasoning level for the job, per the Subagents section of the **p3-mode** skill.
 
 | Lens | Role line | Prompt template |
 |---|---|---|
