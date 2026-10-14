@@ -2,6 +2,22 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-14: sync pstack 0.15.21 → 0.15.23
+
+Upstream range `1dcc2ba..5108b71` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- **New skill `in-your-own-words`** (7d8d909, dbf4981). Typed-only. Restates the user's goals and the problem before work starts. Added to `p3-help`'s table, the recipes, and the README skill list.
+- **`ketchup` reads like `/bro` in under 150 words** (d00ba6e, c86f349). One visual of at most four boxes for what happened, two lines per action item, and a before/after visual per item. T3 wiring kept: `list_thread_pull_requests`, `task_status` and `t3_thread_read` for state, `preview_*`/`device_screenshot` captures, and `html_preview` + `html_render` for charts where upstream says `/visualize`. `p3-help`'s `/ketchup` row follows.
+- **`principle-fix-root-causes`** (36cecbf). After a deep dig, propose the cheap, always-on signal that would have shown the deciding fact at first look.
+- **`p3-agent` can find `p3-mode` without a catalog entry** (b93e811). Upstream's fallback searches `~/.cursor/plugins/` when the parent gave no path. p3 points at `../p3-mode/SKILL.md` from `p3-agent`'s own file instead, since `install.sh` links both side by side, and keeps upstream's "your skill list hides it" and "stop and tell your parent". This is not the absolute path in every prompt that the 0.15.21 sync skipped.
+
+### Skipped
+
+- **Frontmatter cleanup and `/` menu note** (b93e811). Upstream drops `mode` and `reminder` from `poteto-mode`; `p3-mode` never had them. The README's "pick from the `/` menu so Cursor attaches the skill" is Cursor-only.
+- **Version bumps and plugin manifests** (3177dab, 5108b71). Cursor packaging.
+
 ## 2026-10-13: sync pstack 0.15.20 → 0.15.21
 
 Upstream range `1b6d44f..1dcc2ba` (cursor/plugins, `pstack/`).
