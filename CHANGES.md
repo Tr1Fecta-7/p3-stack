@@ -2,6 +2,31 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-14: sync pstack 0.15.23 → 0.15.24
+
+Upstream range `5108b71..1e5c90a` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- **New skill `sharpen`** (79afd75). Typed-only. Before starting, aims the task the way a top expert would, at what the user is really after, without overspecifying it, and always keeps one outside check. Added to `p3-help`'s table, the recipes, and the README skill list.
+- **Match the model to the job** (ce649c0). `p3-mode`'s Subagents section starts each spawn from the role's `p3-models.md` line, then raises or lowers the effort level for the job, and uses fast mode only when CI or trunk is red or a person is blocked. Upstream changes the slug (`-xhigh`, `-fast`). p3 sets the same two things through `delegate_task`'s `target.options` (`effort` or `reasoningEffort`, and `fastMode` or `serviceTier: "priority"`), using the ids `orchestrator_capabilities` lists. Verification stays on the `swarm workers` line. Every routed skill and playbook that spawns delegates points at the rule.
+- **One full swarm per PR** (ce649c0). `multi-phase-plan`'s skeleton and `autopilot-full` run the full swarm once at the code-ready head, and again only for new behavior, a redesign, or a large diff. A rebase, a conflict fix, or a minor fix gets one verifier.
+- **Shipping cut to six steps** (ce649c0). After a merge, the child PR is retargeted to trunk, its patch moves onto the merge result, and it is pushed with `--force-with-lease`; the patch-id rule decides whether its verdict survives. `opening-a-pr` points stacked children at that step. T3 wiring kept: `link_pull_request`, `list_thread_pull_requests`, `delegate_task` verifiers on `preview_*`/`device_*`, and `watch_pull_request` where upstream runs its `watch-pr` script under `/loop`.
+- **Autopilot playbooks cut to their principles** (ce649c0, 8043881). `autopilot-stack` now states only where it differs from `autopilot-full`. New rules: pin `--force-with-lease` to the SHA you last pushed or took over, rebase at merge prep only when trunk's changes can affect the patch, and a tick or reply that changed something catches the operator up per `ketchup`. T3 wiring kept: `delegate_task` owners, `schedule_task` for the hourly audit, `task_status`/`t3_thread_read` probes, `task_cancel`, `watch_pull_request`, and re-reading playbooks from the installed skill.
+- **Orchestrate drops Graphite wording** (ce649c0). The stacker owns every topology change (chain rebases, force-pushes, retargets, merges), and the brief's FORBIDDEN line bans PR retargets and merges.
+
+### p3-only
+
+- **Where autopilot owners keep their trail.** Upstream puts each owner's decision trail and its delegates' records in "the root agent's store", a Cursor path. T3 has no such store, so the root creates a run folder outside the repo and names its absolute path in every brief. This replaces the uncommitted `decisions.tsv` and `children.tsv` the owners returned with their reports.
+- **Fix-forward goes to a fresh owner.** Upstream sends a swarm's findings to the running owner. A T3 delegate cannot take new instructions mid-run, so p3 keeps sending them to a fresh owner with consolidated scope, as before.
+
+### Skipped
+
+- **Origin forge support** (ce649c0 `worktree-audit.sh`, `orch frontier --forge origin`). p3 uses `gh` only.
+- **`composer-*` and `cursor-grok-*` slug families** (ce649c0). p3 has no slug-family fallback in `arena` or `interrogate`; it falls back through `orchestrator_capabilities`.
+- **`orch` and `watch-pr` script changes** (ce649c0). p3 ships neither.
+- **Version bump** (1e5c90a). Cursor packaging.
+
 ## 2026-10-14: sync pstack 0.15.21 → 0.15.23
 
 Upstream range `1dcc2ba..5108b71` (cursor/plugins, `pstack/`).

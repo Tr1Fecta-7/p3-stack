@@ -30,7 +30,7 @@ Each brief is self-contained, since a delegated reviewer gets only the brief, ne
 
 If `delegate_task` rejects a configured entry, run that reviewer on the closest available model of the same family from `orchestrator_capabilities` and say so. Do not block the review on it.
 
-Read `references/reviewer-prompt.md` and fill in the same template for every reviewer with the stated intent, the diff or file contents, the rubric from `references/rubric.md`, and the code-quality lens from `references/code-quality-review.md`. Drain results with `task_status`.
+Read `references/reviewer-prompt.md` and fill in the same template for every reviewer with the stated intent, the diff or file contents, the rubric from `references/rubric.md`, and the code-quality lens from `references/code-quality-review.md`. Drain results with `task_status`. Pick each delegate's reasoning level and fast or standard speed for the job, per the Subagents section of the **p3-mode** skill.
 
 ## Step 4, Synthesize
 

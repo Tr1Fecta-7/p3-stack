@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Explore the codebase to answer "how does X work?" questions. Produce architectural explanations at the level of a senior engineer onboarding onto a subsystem, enough to build a working mental model, not so much that it reads like annotated source code.
 
-Every spawn is a `delegate_task` with a self-contained brief; the child gets only the brief, never this conversation. Each brief says it is read-only: inspect only, no writes, no git commands. Explorers use the `how explorer` role in `p3-models.md`, and every explainer uses the `how explainer` role. Resolve each role's model via `orchestrator_capabilities`. Never hardcode a slug. If the role line is missing, run `setup-p3` or use the parent's model.
+Every spawn is a `delegate_task` with a self-contained brief; the child gets only the brief, never this conversation. Each brief says it is read-only: inspect only, no writes, no git commands. Explorers use the `how explorer` role in `p3-models.md`, and every explainer uses the `how explainer` role. Resolve each role's model via `orchestrator_capabilities`. Never hardcode a slug. If the role line is missing, run `setup-p3` or use the parent's model. Pick each delegate's reasoning level and fast or standard speed for the job, per the Subagents section of the **p3-mode** skill.
 
 ## 1. Assess complexity
 
