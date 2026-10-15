@@ -1,23 +1,54 @@
 #!/usr/bin/env bash
 # Install p3-stack skills. T3 Code threads load skills through their provider:
-# Claude threads (Agent SDK) read ~/.claude/skills, Codex reads ~/.agents/skills.
-#
-#   ./install.sh                          link into ~/.agents/skills
-#   ./install.sh --claude                 also link into ~/.claude/skills (Claude threads and Claude Code)
-#   ./install.sh --project /path/to/repo  link into the repo's .agents/skills (and .claude/skills with --claude)
+# Claude threads (Agent SDK) read .claude/skills, Codex reads .agents/skills.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BASE="$HOME"
+SCOPE=""
+BASE=""
 CLAUDE=0
+
+usage() {
+  cat <<'EOF'
+usage: ./install.sh --global [--claude]
+       ./install.sh --project /path/to/repo [--claude]
+
+  --global          link into ~/.agents/skills
+  --project PATH    link into PATH/.agents/skills
+  --claude          also link into .claude/skills (Claude threads and Claude Code)
+EOF
+}
+
+set_scope() {
+  if [[ -n "$SCOPE" ]]; then
+    echo 'install.sh: choose one of --global or --project' >&2
+    exit 1
+  fi
+  SCOPE="$1"
+}
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --project) BASE="${2:?usage: ./install.sh --project /path/to/repo}"; shift 2 ;;
+    --global) set_scope global; BASE="$HOME"; shift ;;
+    --project)
+      set_scope project
+      if [[ $# -lt 2 ]]; then usage >&2; exit 1; fi
+      if [[ ! -d "$2" ]]; then
+        printf 'install.sh: not a directory: %s\n' "$2" >&2
+        exit 1
+      fi
+      BASE="$(cd "$2" && pwd)"
+      shift 2 ;;
     --claude) CLAUDE=1; shift ;;
-    *) sed -n '2,7p' "$0" | sed 's/^# \{0,1\}//'; exit 1 ;;
+    -h|--help) usage; exit 0 ;;
+    *) usage >&2; exit 1 ;;
   esac
 done
+
+if [[ -z "$SCOPE" ]]; then
+  usage >&2
+  exit 1
+fi
 
 link_into() {
   local target="$1" installed=0 skipped=0 skill name
