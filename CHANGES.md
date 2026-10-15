@@ -2,6 +2,19 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-15: sync pstack 0.15.24 → 0.15.25
+
+Upstream range `1e5c90a..e5136d8` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- **Ketchup explains changes with pictures** (afd51cf). The reply helps the user understand each change, not only where it stands. Screenshots and videos are embedded inline first, then any diagram that explains a change, then one short bullet per thing the user asked for. Action items are plain bullets, and the word limit no longer counts visuals. T3 wiring kept: captures come from `preview_*` and `device_screenshot` and are embedded with Markdown and an absolute path; diagrams and charts use `html_render` after `html_preview`, not `/visualize`; state comes from `list_thread_pull_requests`, `task_status`, and `t3_thread_read`.
+- **Four principles restated as reasoning, not rules** (e5136d8). `attack-the-premise` tests the shared premise directly instead of taking a census of actors. `fix-root-causes` fixes the first place the system went wrong, and allows a guard when the state it handles is legitimate. `make-operations-idempotent` derives each step from the state that exists. `test-behavior-not-implementation` judges a test by two imagined edits: break the behavior, and change only the internals. `correct` and `p3-mode`'s principle index follow. Copied verbatim.
+
+### Skipped
+
+- **Version bump** (6ce45c5) and `docs/guide/08-principles.md`, which p3 does not ship.
+
 ## 2026-10-14: sync pstack 0.15.23 → 0.15.24
 
 Upstream range `5108b71..1e5c90a` (cursor/plugins, `pstack/`).
