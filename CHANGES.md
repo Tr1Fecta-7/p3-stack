@@ -2,6 +2,19 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-18: sync pstack 0.15.25 (no version bump)
+
+Upstream range `e5136d8..0317eb8` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- **Marginal sections cut from four skills** (99743e9). `interrogate`'s lead-judgment reference, `swarm`, and the `type-system-discipline` and `migrate-callers-then-delete-legacy-apis` principles drop text agents follow as well without. The type-system summary drops "refuse to lie to the compiler". `swarm` keeps its T3 wiring; like upstream, Phase A now skips from item 2 to item 4, so "the step 4 target" still points at the model step. The rest copied verbatim.
+- **A brand comes from a type guard, not `as`** (0317eb8). `typescript-best-practices` builds its branded-type example with an `isAgentId` type guard, and its Branded types row says so. Copied verbatim.
+
+### Skipped
+
+- **Claude Code plugin** (182f2ce). Upstream generates a Claude Code copy of pstack under `harness/pstack/` and adds `docs/harness/claude-code.md`, which maps Cursor names to Claude Code ones. p3 skills already name T3 tools and install straight into `~/.claude/skills` and `~/.agents/skills`, so neither applies. Installing upstream's plugin next to p3 would add a second, Cursor-worded set of skills as `/pstack:*`.
+
 ## 2026-10-15: install.sh requires an explicit scope
 
 `install.sh` used to install globally unless `--project` was passed. It now takes `--global` or `--project PATH` and prints usage without one, so a project user never gets home-folder links by accident. Passing both is an error, a project path must already exist, and `--help` works. README, `p3-help`, and the AGENTS.md map show both forms.
