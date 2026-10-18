@@ -2,6 +2,27 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-19: sync pstack 0.15.25 → 0.15.27
+
+Upstream range `0317eb8..f9be7aa` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- **New skill `create-formal-verification-skill`** (4382e68). Typed-only. Finds the code where a bug costs most and tests reach least, verifies one property of it with the tool that fits (a model checker such as TLA+, a code verifier, or a proof), shows the check failing on a broken variant, and leaves a project-local skill that reruns it. Added to `p3-help`'s state check and table, the recipes, `setup-p3`, and the README skill list.
+- **Setup offers formal verification** (f9be7aa). `setup-p3` gains step 8, which offers the new skill once unless the project already has one. `p3-help`'s setup steps say so.
+- **Ketchup lists every waiting call** (16541c6, bc14437). Words go to the calls, not the story: what happened stays under 100 words, each item gets about 30, and items are never cut or folded into a count to fit. One call can cover many items, each with its link, what it changes for users, evidence, risk, and pick. `p3-help`'s table row and a new recipe follow. T3 wiring kept: thread wording, `list_thread_pull_requests`/`task_status`/`t3_thread_read`, `preview_*`/`device_screenshot` captures, and `html_render` after `html_preview` in place of `/visualize`.
+- **Sharpen may hand back a rewritten prompt** (75fabac). The closing ban is gone. Copied verbatim.
+
+### p3-only
+
+- **Where the formal verify skill goes.** Upstream says only "a project-local skill". p3 names `.agents/skills/<name>/` with a `.claude/skills/<name>` link, the same as `create-verification-skill`, so Codex and Claude threads both load it.
+
+### Skipped
+
+- **Skill names match folders** (a968159). Already true in p3 for every skill.
+- **Claude Code plugin fixes** (1b80080) and the Claude Code install paragraph in `poteto-help`. p3 skills already name T3 tools.
+- **Docs refresh** (019a6a2), `docs/guide`, and the version bumps (0b8e952, 0148b78). p3 does not ship them.
+
 ## 2026-10-18: sync pstack 0.15.25 (no version bump)
 
 Upstream range `e5136d8..0317eb8` (cursor/plugins, `pstack/`).
