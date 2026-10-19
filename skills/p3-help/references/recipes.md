@@ -34,7 +34,7 @@ Swap in the real paths, skills, and done checks. Informal wording works.
 ## Review and ship
 
 - `/interrogate the whole branch, but skeptically. don't change anything yet. no nitpicks unless it's a real bug or regression.` Read the dismissals too.
-- `/create-formal-verification-skill prove <property> holds in <module>, even when <steps> interleave or retry.`
+- `/create-formal-verification-skill prove <property> holds in <module>, even when <steps> interleave or retry.` After merges or refactors in that code: `/maintain-formal-verification-skill`.
 - `/swarm check every package under <dir> against its check script. one worker per package. one report.`
 - `/p3-mode open the pr. small ordered commits, evidence in the description.`
 - `/p3-mode babysit this pr. get it green.` For status only: `/p3-mode check on pr <number>. anything outstanding?`
