@@ -2,6 +2,20 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-19: sync pstack 0.15.27 → 0.15.28
+
+Upstream range `f9be7aa..d457567` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- **New skill `maintain-formal-verification-skill`** (7b353f7). Typed-only. Brings a formal verification back in line after the code it covers changed: reads every change since the recorded sync commit, updates the model, harness, or properties from the code, reruns, shows each updated check can still fail, and says whether each failure is drift in the verification or a bug in the code. It never edits product code. Copied verbatim. Added to `p3-help`'s state check and table, the recipes, and the README skill list.
+- **Formal verify skills record what they cover** (7b353f7). `create-formal-verification-skill` has the generated skill record the files and functions each check covers and the commit it last matched, and points at the maintain skill in its hand-off. The p3-only install location is kept.
+- **TLA+ default and a no-verifier fallback** (6b78e9f). `create-formal-verification-skill` makes TLA+ the default for ordering questions in any language, and when no verifier runs on the language it tests the real code with generated inputs instead of a hand model.
+
+### Skipped
+
+- **Docs guide and version bumps** (d457567, and the `docs/guide` part of 7b353f7). p3 does not ship them.
+
 ## 2026-10-19: sync pstack 0.15.25 → 0.15.27
 
 Upstream range `0317eb8..f9be7aa` (cursor/plugins, `pstack/`).
