@@ -2,6 +2,18 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-20: sync pstack 0.15.28 → 0.15.29
+
+Upstream range `d457567..88d4751` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- **Sharpen returns only the rewritten prompt** (88d4751). `/sharpen` goes back to its original four questions (what a top professional would add, the rawest material, their methods and tools, an outside check) and hands back the rewritten prompt instead of doing the task. Copied verbatim. `p3-help`'s table row and the recipe follow.
+
+### Skipped
+
+- **Docs guide and version bumps** (88d4751). p3 does not ship them. The README change is to upstream's skill table, which p3's README doesn't have.
+
 ## 2026-10-19: sync pstack 0.15.27 → 0.15.28
 
 Upstream range `f9be7aa..d457567` (cursor/plugins, `pstack/`).
