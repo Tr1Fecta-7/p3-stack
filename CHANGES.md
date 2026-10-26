@@ -2,6 +2,32 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-26: sync pstack 0.15.29 → 0.15.32
+
+Upstream range `88d4751..99b609a` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- **New skill `statechart`** (eb4db2b, 7698375, 4ec7ffa, 076f4b2). Typed-only. Draws how a system moves between states as a Mermaid chart from a TLA+ model, in the reader's words, with each bug TLC finds as a numbered path; also turns an agreed chart into a TLA+ skeleton, or audits code against an existing spec. `SKILL.md` and `scripts/` copied verbatim. Needs Node; the first PNG render installs `pele` and `@resvg/resvg-js` with npm into `~/.cache`, and the first check installs TLC and Java with mise (about 305 MB) unless TLC and Java are set by hand. Added to `p3-help`'s table and the README skill list.
+- **New skill `ketchup-video`** (3c0fdb4). Typed-only. `/ketchup` with what happened as a short silent slide video and the waiting calls as text under it. Added to `p3-help`'s table and the README skill list.
+- **Formal verify skills read TLA+ results with `/statechart`** (00d5dec). `create-formal-verification-skill` tells the generated skill to read every TLA+ result with `/statechart`, by name only. The p3-only install location is kept.
+- **Reflect never edits an installed skill in place** (7054003). See p3-only.
+- **Swarm's Phase A renumbered** (e73df47). Steps now run 1 to 4 and Phase B points at "the step 3 target", reversing the deliberate 2 → 4 gap from the 2026-10-18 sync now that upstream fixed it. The report names "a result table". T3 wiring kept.
+- **check-plan matches inline code by delimiter length** (86c2448). Double-backtick spans no longer leak into the prose checks. One line in `p3-mode/scripts/check-plan.mjs`.
+
+### p3-only
+
+- **Ketchup-video embeds the video by path.** Adds "Embed the video with Markdown and its absolute file path", as `ketchup` does for screenshots and videos.
+- **Reflect's destination.** Upstream forbids editing `plugins/cache/` and copies to `.cursor/skills/`. p3 skills are links into the p3-stack checkout, so p3 forbids editing through `~/.agents/skills/` or `~/.claude/skills/` links, and copies the skill to the project's `.agents/skills/<skill>/` (linked into `.claude/skills/`) or to `~/.agents/skills/<skill>/`, replacing the link. `install.sh` already skips a real folder.
+- **`/statechart` is "the p3 skill"** in `create-formal-verification-skill`, not "the pstack skill".
+
+### Skipped
+
+- **statechart tests** (`scripts/test/`): a 6,854-line test file and its `.mmd` fixtures. Nothing in the skill reads them; p3 does not ship upstream tests.
+- **worktree-audit GNU stat and date** (f83fbe6). p3's audit does not read transcript mtimes, so it calls neither.
+- **Claude Code auto-update note** (a0b0ad9). About upstream's Claude Code marketplace install, which p3 does not use.
+- **watch-pr and orch fixes** (96dec8e, fe096ef, 3c596e7), `check-plan.test.ts`, `docs/guide`, manifests, and version bumps (642289e, b1a1298). p3 does not ship them.
+
 ## 2026-10-20: sync pstack 0.15.28 → 0.15.29
 
 Upstream range `d457567..88d4751` (cursor/plugins, `pstack/`).
