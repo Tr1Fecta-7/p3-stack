@@ -2,6 +2,10 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-27: T3 Code's merged tools
+
+- T3 Code merged 18 MCP tools into action tools (t3code ed44f251d8). The map in `AGENTS.md`, `p3-mode`'s pause-safely playbook, `make-bot-ui`, `create-verification-skill` and its feature-map examples now name the new tools: `t3_queue` and `t3_pending_request` with an `action`, `t3_thread_transfer` for fork and merge-back, `preview_act` for click, type, press and the other page actions, and `schedule_task` with `scheduledTaskId` for updates.
+
 ## 2026-10-27: sync pstack 0.15.32 → 0.15.34
 
 Upstream range `99b609a..519d36a` (cursor/plugins, `pstack/`).
