@@ -1,5 +1,5 @@
 # Last pstack commit p3-stack is synced with. Updated by `scripts/upstream.sh pin`.
 UPSTREAM_REPO=https://github.com/cursor/plugins.git
 UPSTREAM_PATH=pstack
-UPSTREAM_COMMIT=99b609a72323b70204eab407c622f436e858e112
-UPSTREAM_VERSION=0.15.32
+UPSTREAM_COMMIT=519d36aa98955bf680db01bcde5fdfba686dc901
+UPSTREAM_VERSION=0.15.34
