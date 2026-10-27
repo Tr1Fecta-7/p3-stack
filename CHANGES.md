@@ -2,6 +2,20 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-10-27: sync pstack 0.15.32 → 0.15.34
+
+Upstream range `99b609a..519d36a` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- **`statechart` rewritten as a TypeScript compiler** (34b1b7c, 740d2c0). One command, `scripts/statechart SPEC.tla [--config FILE] [--view FILE] [--out DIR]`, checks a TLA+ model with TLC and draws it as a Mermaid statechart. A view module supplies the reader's words (`state`, `step`, `group`, `colors`, `title`), and the report gives the shortest path to each state that breaks a rule. `from-chart`, `--fixed`, `--against`, and the PNG output are gone. The launcher runs `statechart.ts` with Node 22.18+ (22.x) or 23.6+, Bun 1.1.5+, or Deno 2+. TLC and Java still install with mise. Images are SVGs rendered with Pele per the new `references/render.md`. The old `.mjs` scripts are deleted; `SKILL.md`, `references/`, and `scripts/` (with `package.json` and `tsconfig.json`) copied verbatim. `p3-help`'s row and `create-formal-verification-skill`'s pointer drop the cut features; the latter keeps "the p3 skill".
+
+### Skipped
+
+- **statechart tests** (`scripts/test/`, about 380 files, and the test fix 519d36a). p3 does not ship upstream tests. `package.json` keeps its `test` script and `fast-check` dev dependency, which only the tests use.
+- **README row wording** for `/statechart`. p3's README lists skill names only.
+- **Version bumps** (7c7bde7, 164ced1).
+
 ## 2026-10-26: sync pstack 0.15.29 → 0.15.32
 
 Upstream range `88d4751..99b609a` (cursor/plugins, `pstack/`).
