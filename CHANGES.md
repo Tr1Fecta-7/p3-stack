@@ -2,6 +2,27 @@
 
 Every pstack sync and every p3-only change, newest first. `UPSTREAM` holds the pstack commit the latest sync reached. See [AGENTS.md](AGENTS.md#syncing-with-upstream-pstack) for the sync steps.
 
+## 2026-11-11: sync pstack 0.15.34 → 0.15.36
+
+Upstream range `519d36a..5866df5` (cursor/plugins, `pstack/`).
+
+### Ported
+
+- **Orchestrate runs on the coordinator's own tools** (c742dd6). The playbook is rewritten around Topology and Supervision: one owner per PR, a fresh worker per task with upstream reports pasted in, sub-coordinators only for big areas (three levels, about ten in flight), a verifier from another provider for every PR, one unit end to end before fan-out, kickoffs that name their evidence, diffs read rather than summaries, retries by cause, and the user asked only for real decisions. The store layout, brief template, queue and drain, stack safety, ledger, and the hourly `schedule_task` audit tick are cut, as upstream cut them. T3 wiring: `delegate_task` (`isolation: "worktree"` for an own checkout) or `t3_thread_launch` for workers, a `notes.md` in a run folder outside the repo for program state, `watch_pull_request` for PR events, `t3_thread_transfer` to fork, `t3_thread_send` for follow-ups, `preview_*`/`device_*` for runtime checks, and `link_pull_request` for every PR.
+- **Interrogate keeps only findings a run proves** (ab1f702). Adversaries reuse arena's Phase A steps 3 and 4, Phase B, and Phase F, each finding needs a command and its output, and the lead keeps only what a rerun confirms. The four `references/` files are deleted, including the T3-edited `reviewer-prompt.md` and `rubric.md`. T3 wiring: the `interrogate reviewers` line in `p3-models.md`, spawned with `delegate_task`.
+- **Arena's runner fallback and cross-judge** (ab1f702). A refused runner falls back within its provider or is dropped, with runners added back up to two. The judge is never from the parent's provider, an `inherit-parent` entry never judges, and with no judge from another provider the base is picked alone. p3 reads the parent's model with `t3_thread_configure`. `setup-p3` describes the pool the same way.
+- **p3-mode** (ab1f702). A new first trigger restates the user's goal in the first message, every delegate brief, each PR's `## Why`, and each final report. Explain the Number applies before you measure. Follow-ups to a running delegate stay async. A doubly rejected model continues down the calling skill's fallback, then the closest model of the role's provider, then the parent model. Autopilot-stack is described as Autopilot-full without the merge.
+- **Autopilot-stack is Autopilot-full without the merge** (ab1f702). PRs stop at verified and go to the operator; a PR stacks only on a PR it builds on. The root-owned single-writer chain is cut. T3 wiring kept: `link_pull_request` for each stacked PR, and the hourly audit's `schedule_task` prompt names the file.
+- **Autopilot-full blocks only on shown problems** (ab1f702). A PR is blocked only by a failing run at its head or a doc line it made wrong; inherited problems don't block unless copied, and everything else is a follow-up. This replaces the fix-forward paragraph, including p3's "fresh owner" wording. Rebase also on a known concurrent change to the same files, push each finished unit, give wording-only changes no verifier, and list parked follow-ups in the reply. `multi-phase-plan`, `babysit`, `opening-a-pr` (a PR-opening delegate no longer runs `interrogate`), and `autonomous-run` follow.
+- **Explain the Number: write the decision before you run** (ab1f702). Copied verbatim.
+- **Ketchup-video subtitles each slide** (ab1f702). Holds are measured from the rendered file. p3's embed line kept.
+- **p3-help and recipes**: "subtitled" video, "autopilot, don't merge" for Autopilot-stack, and interrogate's "Dropped list".
+
+### Skipped
+
+- **orch scripts deleted** (c742dd6) and their `package.json` entry. p3 never shipped them.
+- **`docs/guide`, manifests, version bumps, and README rows.** p3 does not ship them, and its README lists names only.
+
 ## 2026-10-27: T3 Code's merged tools
 
 - T3 Code merged 18 MCP tools into action tools (t3code ed44f251d8). The map in `AGENTS.md`, `p3-mode`'s pause-safely playbook, `make-bot-ui`, `create-verification-skill` and its feature-map examples now name the new tools: `t3_queue` and `t3_pending_request` with an `action`, `t3_thread_transfer` for fork and merge-back, `preview_act` for click, type, press and the other page actions, and `schedule_task` with `scheduledTaskId` for updates.
